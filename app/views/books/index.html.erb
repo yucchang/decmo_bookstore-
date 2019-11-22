@@ -1,6 +1,6 @@
-<h1>書本列表</h1>
+<h1 class="title" >書本列表</h1>
 
-<%= link_to "新增書本", new_book_path %>
+<%= link_to "新增書本", new_book_path, class: 'button is-primary is-medium' %>
 
 <ul>
 <% @books.each do |book| %>

@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
-  before_action :find_book, only: [:show, :edit, :upodate, :destroy]
+  before_action :find_book, only: [:show, :edit, :update, :destroy]
 
   def index
     @books = Book.all
@@ -17,7 +17,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params) 
   
     if @book.save
-      redirect_to root_path, notice: '新增成功'
+      redirect_to root_path, notice: 'Book created'
     else
       render :new
     end
@@ -27,9 +27,8 @@ class BooksController < ApplicationController
   end
   
   def update
-  
     if @book.update(book_params)
-      redirect_to root_path, notice: '更新成功'
+      redirect_to root_path, notice: 'Book Updated'
     else
       render :edit
     end
