@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   before_action :find_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    @books = Book.available.with_attached_cover_image
   end
 
   def show
@@ -28,7 +28,7 @@ class BooksController < ApplicationController
   
   def update
     if @book.update(book_params)
-      redirect_to root_path, notice: 'Book Updated'
+      redirect_to edit_book_path(@book), notice: 'Book Updated'
     else
       render :edit
     end
@@ -53,6 +53,11 @@ class BooksController < ApplicationController
                                  :sell_price,
                                  :page_num,
                                  :isbn,
-                                 :isbn13)
+                                 :isbn13,
+                                 :cover_image,
+                                 :on_sell,
+                                 :published_at,
+                                 :publisher_id,
+                                 )
   end
 end
