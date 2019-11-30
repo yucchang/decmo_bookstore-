@@ -1,3 +1,13 @@
 .field_with_errors input{
     border: 1px solid red;
 }
+
+nav.pagination{
+    .page{
+        background-color: rgb(63, 192, 192);
+        padding: 10px;
+        color: white;
+        border-radius: 5px;
+        margin: 4px;
+    }
+}

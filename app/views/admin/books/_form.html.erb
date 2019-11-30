@@ -6,8 +6,9 @@
 </ul>
 <% end %>
 
-<%= form_for(book) do |form| %>
 
+<%= form_for([:admin, book]) do |form| %>
+ 
 
 <div class="field">
   <%= cover_image_tag book %>

@@ -1,0 +1,40 @@
+<h1>Edit Publisher</h1>
+
+<% if @publisher.errors.any? %>
+<ul>
+  <% @publisher.errors.full_messages.each do |msg| %>
+  <li> <%= msg %> </li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_for([:admin, @publisher]) do |f| %>
+
+<div>
+<%= f.label :name %>
+<%= f.text_field :name %>
+</div>
+
+<div>
+<%= f.label :tel %>
+<%= f.text_field :tel %>
+</div>
+
+<div>
+<%= f.label :address %>
+<%= f.text_field :address %>
+</div>
+
+<div>
+<%= f.label :note  %>
+<%= f.text_area :note  %>
+</div> 
+
+<div>
+  <%= f.label :online %>
+  <%= f.text_field :online %>
+</div>
+
+<%= f.submit %>
+
+<% end %>

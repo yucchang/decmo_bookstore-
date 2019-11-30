@@ -1,0 +1,14 @@
+<h1>Publisher List</h1>
+
+
+<%= link_to 'Add Publisher', new_admin_publisher_path %>
+
+<ul>
+    <% @publishers.each do |publisher| %>
+<li>
+  <%= link_to publisher.name, admin_publisher_path(publisher)  %>
+  <%= link_to 'Edit', edit_admin_publisher_path(publisher)  %>
+  <%= link_to 'Delete', admin_publisher_path(publisher), method:'delete', data:{confirm:'Sure to delete?'}%>
+</li>
+<% end %>
+</ul>
