@@ -1,0 +1,62 @@
+<div class="container">
+  <%= form_for([:admin, publisher]) do |f| %>
+  <div class="columns">
+    <div class="column is-4">
+      <div class="field">
+        <%= f.label :name, class:'label' %>
+        <div class="control">
+          <%= f.text_field :name, class:'input' %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-4">
+      <div class="field">
+        <%= f.label :tel, class:'label'%>
+        <div class="control">
+          <%= f.telephone_field :tel, class:'input'%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-2">
+      <div class="field">
+        <%= f.label :address, 'ZIP code', class:'label'%>
+        <div class="control">
+          <%= f.text_field :address, class:'input'%>
+        </div>
+      </div>
+    </div>
+    <div class="column is-6">
+      <div class="field">
+        <%= f.label :address, 'Address-1', class:'label'%>
+        <div class="control">
+          <%= f.text_field :address, class:'input'%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-8">
+      <div class="field">
+        <%= f.label :address, 'Address-2', class:'label'%>
+        <div class="control">
+          <%= f.text_field :address, class:'input'%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-8">
+      <%= f.label :note, class:' label'%>
+      <%= f.text_area :note, class:'input'%>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column">
+      <%= f.submit class:'button is-light'%>
+    </div>
+  </div>
+  <% end %>
+</div>

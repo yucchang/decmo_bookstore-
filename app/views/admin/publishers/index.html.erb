@@ -1,0 +1,28 @@
+<%= link_to 'Add Publisher', new_admin_publisher_path, class: 'button is-dark'%>
+
+<h1 class="title is-3 has-text-grey-light	">Publisher List</h1>
+
+<table class="table is-hoverable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Function</th>
+      <th>Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @publishers.each do |publisher|%>
+    <tr>
+      <td>
+        <%= link_to publisher.name, admin_publisher_path(publisher)  %>
+      </td>
+      <td>
+        <%= link_to 'Edit', edit_admin_publisher_path(publisher) %>
+      </td>
+      <td>
+        <%= link_to 'Delete', admin_publisher_path(publisher), method:'delete', data:{confirm:'Sure?'}  %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
