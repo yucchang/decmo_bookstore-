@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[google_oauth2]
 
 
+  has_many :comments
+
 
   def employee?
     role.in? ['staff', 'boss', 'admin']

@@ -10,6 +10,8 @@ class Book < ApplicationRecord
   belongs_to :publisher  
   # publisher_id
 
+  has_many :comments
+
 
   # scopes
   scope :available, -> { where(on_sell: true).where('list_price > 0') }

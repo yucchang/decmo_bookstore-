@@ -1,1 +1,9 @@
-<h1> BOOK: <%= @book.title %></h1>
+<h1 class="title"> BOOK: <%= @book.title %></h1>
+
+<figure class="image">
+  <%= cover_image_tag @book, dummy_img: true %>
+</figure>
+
+<article>
+  <%= simple_format(@book.description) %>
+</article>

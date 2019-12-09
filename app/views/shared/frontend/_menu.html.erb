@@ -1,0 +1,18 @@
+<aside class="column is-2 is-fullheight menu">
+<p class="menu-label">
+  Category
+</p>
+<ul class="menu-list">
+  <li><a>Ruby</a></li>
+  <li><a>Rails</a></li>
+  <li><a>Javascript</a></li>
+</ul>
+<p class="menu-label">
+  Publisher
+</p>
+<ul class="menu-list">
+  <% publishers.each do |publisher|%>
+  <li><%= link_to publisher.name, publisher_path(publisher) %></li>
+  <% end %>
+</ul>
+</aside>

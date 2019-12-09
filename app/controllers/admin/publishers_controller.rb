@@ -1,6 +1,5 @@
-class Admin::PublishersController < ApplicationController
+class Admin::PublishersController < Admin::BaseController
   before_action :find_publisher, only: [:show, :edit, :update, :destroy ]
-  layout 'backend'
 
   def index
     @publishers = Publisher.all
