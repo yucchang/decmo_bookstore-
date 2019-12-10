@@ -11,9 +11,15 @@ class Book < ApplicationRecord
   # publisher_id
 
   has_many :comments
+  has_many :my_favorites
+  has_many :users, through: :my_favorites
 
 
   # scopes
   scope :available, -> { where(on_sell: true).where('list_price > 0') }
+
+  def favorited_by?(u)
+    MyFavorite.exists?(user: u)
+  end
 end
 

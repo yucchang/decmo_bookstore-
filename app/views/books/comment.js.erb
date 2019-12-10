@@ -1,0 +1,8 @@
+  
+let comment_area = document.querySelector('#comment_field');
+if (comment_area) {
+  let content = '<%= j(render 'comments/comment', comment: @comment) %>';
+  comment_field.innerHTML = content + comment_field.innerHTML;
+
+  document.querySelector('#comment_form').reset();
+}

@@ -1,0 +1,8 @@
+ <article class="message is-dark">
+    <div class="message-body">
+      <p>Title：<%= comment.title %></p>
+      Content：
+      <%= simple_format(comment.content) %>
+      <small><%= comment.created_at %></small>
+    </div>
+</article>

@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
 
   has_many :comments
+  has_many :my_favorites
+  has_many :books, through: :my_favorites
+
 
 
   def employee?

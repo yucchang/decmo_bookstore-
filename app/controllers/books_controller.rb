@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
-  before_action :find_book, only: [:show]
+  before_action :find_book, only: [:show, :comment]
   layout 'book'
 
   def index
@@ -12,11 +12,41 @@ class BooksController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @book.comments.order(id: :desc)
   end 
+
+  def comment
+    #comment 
+    # @comment = Comment.new(comment_params, user: current_user, book: @book)
+
+    #user 
+    # @comment = current_user.comments.build(comment_params, book: @book)
+
+    #book
+    @comment = @book.comments.build(comment_params)
+
+    if @comment.save 
+      respond_to do |format|
+        format.html
+        format.js
+      end
+      # render js: 'alert("hi");'
+      # redirect_to @book, notice: 'Comment created.'
+    else 
+      render js:'alert("error occurs");'
+    end
+  end
 
   private
 
   def find_book
     @book = Book.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment)
+          .permit(:title, :content)
+          .merge(user: current_user)
   end
 end
