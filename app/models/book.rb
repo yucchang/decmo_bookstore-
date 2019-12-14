@@ -10,6 +10,8 @@ class Book < ApplicationRecord
   belongs_to :publisher  
   # publisher_id
 
+  belongs_to :category  
+
   has_many :comments
   has_many :my_favorites
   has_many :users, through: :my_favorites

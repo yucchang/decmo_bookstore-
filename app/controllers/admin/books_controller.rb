@@ -61,6 +61,7 @@ class Admin::BooksController < Admin::BaseController
                                  :on_sell,
                                  :published_at,
                                  :publisher_id,
+                                 :category_id
                                  )
   end
 end

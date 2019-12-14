@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_002924) do
+ActiveRecord::Schema.define(version: 2019_12_11_004232) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2019_12_11_002924) do
     t.datetime "updated_at", precision: 6, null: false
     t.date "published_at"
     t.integer "publisher_id"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_books_on_category_id"
     t.index ["isbn"], name: "index_books_on_isbn", unique: true
     t.index ["isbn13"], name: "index_books_on_isbn13", unique: true
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
@@ -56,10 +58,8 @@ ActiveRecord::Schema.define(version: 2019_12_11_002924) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.integer "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_categories_on_book_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(version: 2019_12_11_002924) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories", "books"
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
   add_foreign_key "my_favorites", "books"

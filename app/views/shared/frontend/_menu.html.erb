@@ -3,9 +3,9 @@
   Category
 </p>
 <ul class="menu-list">
-  <li><a>Ruby</a></li>
-  <li><a>Rails</a></li>
-  <li><a>Javascript</a></li>
+  <% categories.each do |category| %>
+  <li><%= link_to category.name, category_path(category) %></li>
+  <% end %>
 </ul>
 <p class="menu-label">
   Publisher

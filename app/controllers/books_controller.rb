@@ -9,6 +9,7 @@ class BooksController < ApplicationController
                  .page(params[:page]) 
                  .per(4)
     @publishers = Publisher.available
+    @categories = Category.all
   end
 
   def show
