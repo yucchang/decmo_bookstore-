@@ -1,0 +1,8 @@
+<h1 class="title">Cart List</h1>
+
+<%= link_to 'Clean Cart', cart_path, method: 'delete', class:'button is-small is-danger' if not current_cart.empty? %>
+
+<%= render 'cart', cart: current_cart %>
+
+<%= link_to 'Continue', root_path, class:'button is-primary' %>
+<%= link_to 'Checkout', '#', class:'button is-warning' if not current_cart.empty? %>

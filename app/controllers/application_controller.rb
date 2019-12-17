@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
+  helper_method :current_cart  
 
   private
   def record_not_found
@@ -7,5 +9,9 @@ class ApplicationController < ActionController::Base
            layout: false, 
            status: 404
   end
+  
+  def current_cart 
+    @cart ||= Cart.from_hash(session['cart1234'])
+  end 
 end
 

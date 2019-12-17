@@ -1,0 +1,34 @@
+<% if cart.empty? %>
+<article class="message is-danger">
+  <div class="message-body">
+    <p>The Cart is now Empty</p>
+  </div>
+</article>
+<% else %>
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Qty</th>
+      <th>Single Price</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cart.items.each do |item|%>
+    <tr>
+      <td><%= item.product.title %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.product.sell_price %></td>
+      <td><%= item.total_price %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">TOTAL</td>
+      <td><%= cart.total_price %></td>
+    </tr>
+  </tfoot>
+</table>
+<% end %>
