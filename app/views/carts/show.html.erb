@@ -5,4 +5,4 @@
 <%= render 'cart', cart: current_cart %>
 
 <%= link_to 'Continue', root_path, class:'button is-primary' %>
-<%= link_to 'Checkout', '#', class:'button is-warning' if not current_cart.empty? %>
+<%= link_to 'Checkout', checkout_cart_path, class:'button is-warning' if not current_cart.empty? %>

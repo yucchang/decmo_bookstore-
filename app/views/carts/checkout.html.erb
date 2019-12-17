@@ -1,0 +1,29 @@
+<h1 class="title">Checkout</h1>
+
+<%= render 'cart', cart: current_cart %>
+
+
+<%= form_with(model: @order) do |form|%>
+<div class="field">
+<%= form.label :recipient, class:'label' %>
+<%= form.text_field :recipient, class:'input' %>
+</div>
+
+<div class="field">
+<%= form.label :tel, class:'label' %>
+<%= form.text_field :tel, class:'input' %>
+</div>
+
+<div class="field">
+<%= form.label :address, class:'label' %>
+<%= form.text_field :address, class:'input' %>
+</div>
+
+<div class="field">
+<%= form.label :note, class:'label' %>
+<%= form.text_area :note, class:'input' %>
+</div>
+
+<%= form.submit class:'button is-primary' %>
+<% end %>
+

@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   layout 'book'
+  before_action :authenticate_user!, only: [:checkout] 
 
   def add
     current_cart.add_item(params[:id])
@@ -15,4 +16,8 @@ class CartsController < ApplicationController
     session['cart1234'] = nil
     redirect_to root_path, notice: 'Cart is clear now'
   end
+
+  def checkout
+    @order = Order.new
+  end 
 end

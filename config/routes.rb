@@ -6,11 +6,18 @@ Rails.application.routes.draw do
   resource :cart, only: [:show, :destroy] do 
     collection do 
       post :add, path: ':id/add'
+      get :checkout  # cart#checkout
       # /cart/:id/add
       # POST :add, path: '/add/:id'
       # /cart/add/:id
     end 
   end
+
+  resources :orders, only: [:index, :show, :create] do 
+    member do 
+      put :cancel  # PUT /orders/2/cancel 
+    end 
+  end 
   
   resources :books, only: [:index, :show] do 
     member do
