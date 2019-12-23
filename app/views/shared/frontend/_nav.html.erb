@@ -17,7 +17,7 @@
     </div>
 
     <div class="navbar-end">
-      <div class="navbar-item">
+      <div class="navbar-item data-controller='cart'">
 
         <%= link_to cart_path, class: 'button' do%>
         <i class="fas fa-cart-plus"></i>(<%= current_cart.items.count%>)

@@ -27,16 +27,8 @@ class OrdersController < ApplicationController
 
 
   def pay
-    gateway = Braintree::Gateway.new(
-      environment: :sandbox,
-      merchant_id: ENV['braintree_merchant_id'],
-      public_key: ENV['braintree_public_key'],
-      private_key: ENV['braintree_private_key']
-      )
-
     @token = gateway.client_token.generate
     @order = current_user.orders.find_by(num: params[:id])
-
   end
 
   def paid
@@ -44,7 +36,7 @@ class OrdersController < ApplicationController
     order = current_user.orders.find_by(num: params[:id])
 
     result = gateway.transaction.sale(
-      amount: total_price,
+      amount: order.total_price,
       payment_method_nonce: nonce,
       options: {
         submit_for_settlement: true
@@ -52,7 +44,7 @@ class OrdersController < ApplicationController
 )
 
     if result.success?
-      order.pay?
+      order.pay!(transaction_id: result.transaction.id)
       redirect_to orders_path, notice: 'Transaction success'
     else
       redirect_to orders_path, notice: 'Error occur during transaction' #{result.transaction.status}
@@ -62,9 +54,15 @@ class OrdersController < ApplicationController
   def cancel
     # order = Order.find(num: params[:id], current_user) 
     order = current_user.orders.find_by(num: params[:id])
-    order.cancel! if order.may_cancel?
-    # TODO: If the payment is paid -> refund
-    redirect_to orders_path, notice: 'Order: #{order.num} is cancelled!!!!!'
+    if order.paid?
+      result = gateway.transaction.refund("the_transaction_id")
+        if order.success?
+          order.cancel! if order.may_cancel?
+          redirect_to orders_path, notice: 'Order: #{order.num} is cancelled!!!!!'
+        else
+          redirect_to orders_path, notice: 'Order: #{order.num} errors when cancel'
+        end
+    end
   end 
 
   private 

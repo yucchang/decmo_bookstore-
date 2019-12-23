@@ -30,7 +30,7 @@
           <%= book.description %>
           <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           <hr>
-          <%= link_to "Add to Cart", add_cart_path(book), class: 'button is-light is-small', method: 'post' %>
+          <%= link_to "Add to Cart", '#', class: 'button is-light is-small', method: 'post', data:{action:'book#add_to_cart'} %>
         </div>
       </div>
     </div>
