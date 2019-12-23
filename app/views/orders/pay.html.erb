@@ -5,7 +5,7 @@
 <div id="dropin-container"></div>
 <button id="submit-button" class:'button is-primary'>Confirm to pay</button>
 
-<%= form_with paid_order_path(@order.num), id:'payment-form' do |form|%>
+<%= form_with url: paid_order_path(@order.num), id:'payment-form' do |form|%>
 <%= form.hidden_field :nonce %>
 <% end %>
 
