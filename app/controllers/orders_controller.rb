@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
     if @order.save 
       # clear cart
       session['cart1234'] = nil
+      # redirect_to payment page
       redirect_to pay_order_path(@order), notice: 'Order is placed.'
     else
       render 'carts/checkout', notice: 'Error' 
@@ -54,15 +55,21 @@ class OrdersController < ApplicationController
   def cancel
     # order = Order.find(num: params[:id], current_user) 
     order = current_user.orders.find_by(num: params[:id])
+
     if order.paid?
+      gateway.transaction.void(order.transaction_id)
       result = gateway.transaction.refund("the_transaction_id")
-        if order.success?
-          order.cancel! if order.may_cancel?
-          redirect_to orders_path, notice: 'Order: #{order.num} is cancelled!!!!!'
-        else
-          redirect_to orders_path, notice: 'Order: #{order.num} errors when cancel'
-        end
-    end
+
+      if result.success?
+        order.cancel! if order.may_cancel?
+        redirect_to orders_path, notice: 'Order: #{order.num} is cancelled!!!!!'
+      else
+        redirect_to orders_path, notice: 'Order: #{order.num} errors when cancel'
+      end
+    else
+      order.cancel! if order.may_cancel?
+      redirect_to orders_path, notice: "訂單#{order.num}已取消"
+    end 
   end 
 
   private 
@@ -71,11 +78,11 @@ class OrdersController < ApplicationController
   end
 
   def gateway
-    gateway = Braintree::Gateway.new(
+    Braintree::Gateway.new(
       environment: :sandbox,
       merchant_id: ENV['braintree_merchant_id'],
       public_key: ENV['braintree_public_key'],
       private_key: ENV['braintree_private_key']
-      )
+    )
   end
 end

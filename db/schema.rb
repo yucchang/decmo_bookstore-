@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2019_12_23_070307) do
     t.string "num"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "transction_id"
+    t.string "transaction_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

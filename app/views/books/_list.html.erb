@@ -27,10 +27,12 @@
         </div>
 
         <div class="content">
-          <%= book.description %>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <div class="is-size-7">
+          <time datetime="<%= book.published_at %>"><%= book.published_at %></time>
+        </div>
+          <p class="content"><%= strip_tags(book.description).truncate(20) %></p>
           <hr>
-          <%= link_to "Add to Cart", '#', class: 'button is-light is-small', method: 'post', data:{action:'book#add_to_cart'} %>
+          <%= link_to "Add to Cart", add_cart_path(book), remote: true, method: 'post', class: 'button is-light is-small'%>
         </div>
       </div>
     </div>
